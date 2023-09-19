@@ -1,0 +1,30 @@
+{
+  "name": "@frdnspnzr/use-data",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "",
+  "main": "lib/useData.js",
+  "types": "lib/useData.d.ts",
+  "source": "",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Frdnspnzr/use-data.git"
+  },
+  "author": "Pascal Greilach",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Frdnspnzr/use-data/issues"
+  },
+  "homepage": "https://github.com/Frdnspnzr/use-data#readme",
+  "devDependencies": {
+    "@types/react": "^18.2.22",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^4.35.3",
+    "react": "^18.2.0"
+  }
+}
