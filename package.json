@@ -2,10 +2,9 @@
   "name": "@frdnspnzr/use-data",
   "type": "module",
   "version": "0.1.0",
-  "description": "",
+  "description": "The opinionated API wrapper that does stuff the way I want!",
   "main": "lib/useData.js",
   "types": "lib/useData.d.ts",
-  "source": "",
   "scripts": {
     "build": "tsc"
   },
@@ -14,7 +13,7 @@
     "url": "git+https://github.com/Frdnspnzr/use-data.git"
   },
   "author": "Pascal Greilach",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Frdnspnzr/use-data/issues"
   },
