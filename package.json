@@ -5,6 +5,9 @@
   "description": "The opinionated API wrapper that does stuff the way I want!",
   "main": "lib/useData.js",
   "types": "lib/useData.d.ts",
+  "files": [
+    "lib/*.**"
+  ],
   "scripts": {
     "build": "tsc"
   },
