@@ -16,5 +16,5 @@ export declare function UseDataContextProvider({ client, children, }: PropsWithC
     client: QueryClient;
 }>): import("react/jsx-runtime").JSX.Element;
 export declare function useData<TData, TQueryKey extends QueryKey>(queryKey: TQueryKey, queryFn: QueryFn<TData>): LoadingHook<TData>;
-export declare function useMutatingData<TData, TQueryKey extends QueryKey>(queryKey: TQueryKey, queryFn: QueryFn<TData>, mutationFn: (data: Partial<TData>) => Promise<TData>): UpdateHook<TData>;
+export declare function useMutatingData<TData extends object, TQueryKey extends QueryKey>(queryKey: TQueryKey, queryFn: QueryFn<TData>, mutationFn: (data: Partial<TData>) => Promise<TData>): UpdateHook<TData>;
 export {};

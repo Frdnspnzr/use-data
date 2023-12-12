@@ -1,7 +1,7 @@
 {
   "name": "@frdnspnzr/use-data",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "The opinionated API wrapper that does stuff the way I want!",
   "main": "lib/useData.js",
   "types": "lib/useData.d.ts",
@@ -26,7 +26,7 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "@tanstack/react-query": "^4.35.3",
+    "@tanstack/react-query": "^5.13.4",
     "react": "^18.2.0"
   }
 }

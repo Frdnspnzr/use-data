@@ -44,7 +44,7 @@ export function useData<TData, TQueryKey extends QueryKey>(
 
   const value = useMemo<LoadingHook<TData>>(
     () => ({
-      loading: queryStatus === "loading",
+      loading: queryStatus === "pending",
       data: queryData,
     }),
     [queryData, queryStatus]
@@ -53,7 +53,10 @@ export function useData<TData, TQueryKey extends QueryKey>(
   return value;
 }
 
-export function useMutatingData<TData, TQueryKey extends QueryKey>(
+export function useMutatingData<
+  TData extends object,
+  TQueryKey extends QueryKey
+>(
   queryKey: TQueryKey,
   queryFn: QueryFn<TData>,
   mutationFn: (data: Partial<TData>) => Promise<TData>
@@ -61,20 +64,23 @@ export function useMutatingData<TData, TQueryKey extends QueryKey>(
   const queryClient = useQueryClient();
   const dataHook = useData(queryKey, queryFn);
 
-  const { mutate, isLoading } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn,
-    onMutate: async (newData) => {
+    onMutate: async (newData: Partial<TData>) => {
       await queryClient.cancelQueries({ queryKey });
-      const oldData = queryClient.getQueryData<TData>(queryKey);
-      queryClient.setQueryData(queryKey, () => ({ ...oldData, ...newData }));
-      return { oldUser: oldData };
+      queryClient.setQueryData<TData>(
+        queryKey,
+        (oldData) => ({ ...oldData, ...newData } as TData)
+      );
+      const updatedData = queryClient.getQueryData(queryKey);
+      return { data: updatedData };
     },
     onError: (err, newData, context) => {
       //TODO Pass error to caller
-      queryClient.setQueryData(queryKey, context?.oldUser);
+      queryClient.setQueryData(queryKey, context?.data);
     },
     onSettled: () => {
-      queryClient.invalidateQueries(queryKey);
+      queryClient.invalidateQueries({ queryKey });
     },
   });
 
@@ -89,9 +95,9 @@ export function useMutatingData<TData, TQueryKey extends QueryKey>(
             }
           },
         }),
-      updating: isLoading,
+      updating: isPending,
     }),
-    [dataHook, isLoading]
+    [dataHook, isPending]
   );
 
   return value;
