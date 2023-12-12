@@ -42,8 +42,10 @@ export function useUser(id: string) {
 
 The useData hook returns the following properties:
 
-- `loading`: Boolean indicating if the data is currently loading.
+- `isLoading`: Boolean indicating if the data is currently loading.
+- `isError`: Boolean indicating if there was an error with fetching the data.
 - `data`: The actual data returned by the queryFn.
+- `error`: Information about what went wrong (or undefined if everything is okay).
 
 ### useMutatingData(queryKey, queryFn, mutationFn)
 

@@ -4,8 +4,10 @@ export interface UpdateCallbacks<TData> {
     onSettled?: (data: TData) => void;
 }
 interface LoadingHook<TData> {
-    loading: boolean;
+    isLoading: boolean;
+    isError: boolean;
     data: TData | undefined;
+    error: Error | undefined;
 }
 interface UpdateHook<TData> extends LoadingHook<TData> {
     update: (data: Partial<TData>, callbacks?: UpdateCallbacks<TData>) => void;
