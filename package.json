@@ -3,13 +3,14 @@
   "type": "module",
   "version": "0.2.0",
   "description": "The opinionated API wrapper that does stuff the way I want!",
-  "main": "lib/useData.js",
+  "main": "lib/index.cjs",
+  "module": "lib/index.mjs",
   "types": "lib/useData.d.ts",
   "files": [
     "lib/*.**"
   ],
   "scripts": {
-    "build": "tsc"
+    "build": "rollup --config rollup.config.mjs"
   },
   "repository": {
     "type": "git",
@@ -22,7 +23,12 @@
   },
   "homepage": "https://github.com/Frdnspnzr/use-data#readme",
   "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.5",
     "@types/react": "^18.2.22",
+    "rollup": "^4.8.0",
+    "rollup-plugin-dts": "^6.1.0",
+    "tslib": "^2.6.2",
     "typescript": "^5.2.2"
   },
   "dependencies": {

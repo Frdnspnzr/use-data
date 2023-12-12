@@ -1,64 +1,14 @@
-"use client";
-
-import {
-  QueryClient,
-  QueryClientProvider,
-  QueryKey,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
-import { PropsWithChildren, useMemo } from "react";
+import { QueryKey, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMemo } from "react";
+import { LoadingHook, QueryFn, useData } from "./useData";
 
 export interface UpdateCallbacks<TData> {
   onSettled?: (data: TData) => void;
 }
 
-interface LoadingHook<TData> {
-  isLoading: boolean;
-  isError: boolean;
-  data: TData | undefined;
-  error: Error | undefined;
-}
-
 interface UpdateHook<TData> extends LoadingHook<TData> {
   update: (data: Partial<TData>, callbacks?: UpdateCallbacks<TData>) => void;
   updating: boolean;
-}
-
-type QueryFn<TData> = () => Promise<TData> | TData | undefined;
-
-export function UseDataContextProvider({
-  client,
-  children,
-}: PropsWithChildren<{ client: QueryClient }>) {
-  return <QueryClientProvider client={client}>{children}</QueryClientProvider>;
-}
-
-export function useData<TData, TQueryKey extends QueryKey>(
-  queryKey: TQueryKey,
-  queryFn: QueryFn<TData>
-): LoadingHook<TData> {
-  const {
-    data: queryData,
-    status: queryStatus,
-    error: queryError,
-  } = useQuery({
-    queryKey,
-    queryFn,
-  });
-
-  const value = useMemo<LoadingHook<TData>>(
-    () => ({
-      isLoading: queryStatus === "pending",
-      isError: queryStatus === "error",
-      data: queryData,
-      error: queryError || undefined,
-    }),
-    [queryData, queryStatus]
-  );
-
-  return value;
 }
 
 export function useMutatingData<
